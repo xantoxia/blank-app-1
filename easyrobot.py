@@ -17,8 +17,8 @@ import pytz
 
 
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]  # 从 Streamlit secrets 中获取 GitHub 令牌
-GITHUB_USERNAME = 'HAPPYJINHAPPY'  # 替换为你的 GitHub 用户名
-GITHUB_REPO = 'blank-app'  # 替换为你的 GitHub 仓库名
+GITHUB_USERNAME = 'xantoxia'  # 替换为你的 GitHub 用户名
+GITHUB_REPO = 'blank-app-1'  # 替换为你的 GitHub 仓库名
 GITHUB_BRANCH = 'main'  # 要上传的分支
 FILE_PATH = 'fatigue_data.csv'  # 文件路径
 
@@ -426,7 +426,7 @@ def call_ark_api(client, messages):
     try:
         ark_messages = [{"role": msg["role"], "content": msg["content"]} for msg in messages]
         completion = client.chat.completions.create(
-            model="deepseek-ai/DeepSeek-V2.5",
+            model="Pro/deepseek-ai/DeepSeek-V3.2",
             messages=ark_messages,
             stream=True
         )
@@ -538,8 +538,8 @@ if st.button("开始 AI 分析"):
     # 显示 AI 分析部分
     st.subheader("AI 分析")
     st.info("生成潜在人因危害分析及改善建议：")
-    API_KEY = "sk-zyiqsryunuwkjonzywoqfwzksxmxngwgdqaagdscgzepnlal" # 直接设置 API_KEY
-    client = OpenAI(api_key=API_KEY,
+    API_KEY = st.secrets["API_KEY"] # 直接设置 API_KEY
+    client = OpenAI(api_key=st.secrets["API_KEY"],
                     base_url="https://api.siliconflow.cn/v1")
     if API_KEY:
         st.session_state.API_KEY = API_KEY
